@@ -33,9 +33,8 @@
                   <Insets />
                </VBox.margin>
                <children>
-                  <Label fx:id="imageBeforeText" text="Label" textAlignment="CENTER" />
-                  <Label fx:id="imageStateText" layoutX="10.0" layoutY="10.0" text="Label" textAlignment="CENTER" translateY="20.0" />
-                  <Label fx:id="imageAfterText" text="Label" textAlignment="CENTER" />
+                  <Label fx:id="imageBeforeText" text="Original" textAlignment="CENTER" />
+                  <Label fx:id="imageAfterText" text="After" textAlignment="CENTER" />
                </children>
                <opaqueInsets>
                   <Insets />

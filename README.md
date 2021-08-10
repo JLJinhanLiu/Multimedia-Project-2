@@ -1,15 +1,9 @@
-# CMPT 365 Multimedia Project 1
+# CMPT 365 Multimedia Project 2
 This is a GitHub repo for a individual class project for CMPT 365 at SFU.
-The goal of the Project is to design a GUI program to display audio waveforms, apply fade-in and fade-out from -20dB, and apply numerous effects to bmp images.
-
-###Audio
-This project uses the external API developed by goxr3plus to read .wav files and generates an array of samples.\
-The samples are then imported to Javafx.BarChart and displayed to the user.\
-The waveform can be transformed by applying a -20dB fade-in/fade-out from both end.
+The goal of the Project is to design a GUI program to use DCT on .bmp images, output the quantized result and the final image.
 
 ### Image
-The program can read .bmp images and apply greyscaling, dithering using a 4x4 matrix and auto colour-correction.
-
+The program can read .bmp images and apply DCT, then output the compressed image.
 
 ## Prerequisites
 Configure IntelliJ for a standard JavaFX project using JavaFX 16.

@@ -71,7 +71,7 @@ public class Controller {
         // pre-process images
         if (isImageFile){
             imageBefore.setImage(image);
-            imageAfter.setImage(ImageProcessing.quantization(image));
+            imageAfter.setImage(ImageProcessing.convert(image));
         }
     }
 
