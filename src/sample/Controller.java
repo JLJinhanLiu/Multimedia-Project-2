@@ -26,9 +26,7 @@ public class Controller {
 
     //image & effects
     private Image image;
-    private WritableImage greyscaleImage;
-    private WritableImage ditheredImage;
-    private WritableImage correctedImage;
+
     private Reflection reflection = new Reflection();
 
     //FXML
@@ -72,9 +70,8 @@ public class Controller {
 
         // pre-process images
         if (isImageFile){
-            greyscaleImage = ImageProcessing.greyscaleImage(image);
-            ditheredImage = ImageProcessing.ditherImage(greyscaleImage);
-            correctedImage = ImageProcessing.correctImage(image);
+            imageBefore.setImage(image);
+            imageAfter.setImage(ImageProcessing.quantization(image));
         }
     }
 
@@ -133,39 +130,6 @@ public class Controller {
         }
     }
 
-    public void imageReset(){
-        imageStage = 0;
-        imageNext();
-    }
-
-    public void imageNext(){
-        if (imageFile){
-            switch (imageStage){
-                case 0: imageAfter.setImage(greyscaleImage);
-                        imageBefore.setImage(image);
-                        imageBeforeText.setText("Original Image");
-                        imageAfterText.setText("Greyscale Image");
-                        break;
-                case 1: imageBefore.setImage(greyscaleImage);
-                        imageAfter.setImage(ditheredImage);
-                        imageBeforeText.setText("Greyscale Image");
-                        imageAfterText.setText("Dithered Image");
-                        break;
-                case 2:
-                        imageBefore.setImage(image);
-                        imageAfter.setImage(correctedImage);
-                        imageBeforeText.setText("Original Image");
-                        imageAfterText.setText("Autoleveled Image");
-                        break;
-                default:imageReset();
-                        imageStage--;
-                        break;
-            }
-            imageStage++;
-            imageStateText.setText("Displaying step " + imageStage);
-        }
-    }
-
     public void openFileImage(MouseEvent event) {
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         FileChooser fileChooser = new FileChooser();
@@ -176,8 +140,6 @@ public class Controller {
         if (file != null) {
             image = new Image(file.toURI().toString());
             onFileSuccess(false, true);
-            // pre-process images
-            imageReset();
         }
     }
 

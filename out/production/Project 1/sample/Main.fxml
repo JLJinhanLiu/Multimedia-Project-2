@@ -67,7 +67,6 @@
             </Text>
             <Button alignment="CENTER" mnemonicParsing="false" onMouseClicked="#openFileAudio" text="Open File..." />
             <Button layoutX="136.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#generateGraph" text="Generate Graph" />
-            <Button layoutX="94.0" layoutY="12.0" mnemonicParsing="false" onMouseClicked="#audioFade" text="With Fade-in/Fade-out" />
         </items>
          <padding>
             <Insets left="10.0" />
@@ -81,8 +80,6 @@
                </font>
             </Text>
             <Button alignment="CENTER" mnemonicParsing="false" onMouseClicked="#openFileImage" text="Open File..." />
-            <Button mnemonicParsing="false" onMouseClicked="#imageNext" text="Next" />
-            <Button layoutX="150.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#imageReset" text="Reset" />
          </items>
          <padding>
             <Insets left="10.0" />
