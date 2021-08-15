@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="HuffmanCoding">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/sample/HuffmanCoding.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

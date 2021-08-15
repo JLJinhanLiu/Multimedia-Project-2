@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.chart.BarChart?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ToolBar?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -19,7 +15,8 @@
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="768.0" prefWidth="1024.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox fx:id="hBoxImage" alignment="CENTER" prefHeight="500.0" prefWidth="200.0" spacing="10.0">
+            <Label fx:id="compressionInfo" alignment="TOP_CENTER" maxHeight="400.0" maxWidth="500.0" minHeight="80.0" opacity="0.0" scaleX="2.0" scaleY="2.0" text="Label" textAlignment="CENTER" translateY="200.0" />
+            <HBox fx:id="hBoxImage" alignment="CENTER" prefHeight="500.0" prefWidth="200.0" spacing="10.0" translateY="-100.0">
                <children>
                   <ImageView fx:id="imageBefore" fitHeight="500.0" fitWidth="500.0" pickOnBounds="true" preserveRatio="true" />
                   <ImageView fx:id="imageAfter" fitHeight="500.0" fitWidth="500.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
@@ -28,33 +25,18 @@
                   <Insets top="150.0" />
                </VBox.margin>
             </HBox>
-            <HBox fx:id="hBoxText" alignment="CENTER" opacity="0.0" prefHeight="100.0" prefWidth="200.0" spacing="100.0" translateY="-25.0">
+            <HBox fx:id="hBoxText" alignment="CENTER" opacity="0.0" prefHeight="100.0" prefWidth="200.0" spacing="100.0" translateY="-150.0">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
                <children>
-                  <Label fx:id="imageBeforeText" text="Original" textAlignment="CENTER" />
-                  <Label fx:id="imageAfterText" text="After" textAlignment="CENTER" />
+                  <Label text="Original" textAlignment="CENTER" />
+                  <Label text="After" textAlignment="CENTER" />
                </children>
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
             </HBox>
-            <BorderPane fx:id="borderPane" prefHeight="200.0" prefWidth="200.0" translateY="-80.0">
-               <VBox.margin>
-                  <Insets top="-450.0" />
-               </VBox.margin>
-               <center>
-                  <BarChart fx:id="barChart" horizontalGridLinesVisible="false" legendSide="TOP" legendVisible="false" opacity="0.0" verticalGridLinesVisible="false" BorderPane.alignment="CENTER">
-                    <xAxis>
-                      <CategoryAxis animated="false" gapStartAndEnd="false" label="Samples" side="TOP" tickMarkVisible="false" />
-                    </xAxis>
-                    <yAxis>
-                      <NumberAxis animated="false" side="LEFT" />
-                    </yAxis>
-                  </BarChart>
-               </center>
-            </BorderPane>
          </children>
       </VBox>
       <ToolBar prefHeight="40.0" prefWidth="1024.0">
@@ -65,7 +47,6 @@
                </font>
             </Text>
             <Button alignment="CENTER" mnemonicParsing="false" onMouseClicked="#openFileAudio" text="Open File..." />
-            <Button layoutX="136.0" layoutY="17.0" mnemonicParsing="false" onMouseClicked="#generateGraph" text="Generate Graph" />
         </items>
          <padding>
             <Insets left="10.0" />

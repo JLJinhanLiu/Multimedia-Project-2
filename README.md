@@ -2,8 +2,11 @@
 This is a GitHub repo for a individual class project for CMPT 365 at SFU.
 The goal of the Project is to design a GUI program to use DCT on .bmp images, output the quantized result and the final image.
 
+### Audio
+The program can read .wav files and compress the audio with channel coupling and linear prediction, with additional Huffman encoding before outputting as a binary file.
+
 ### Image
-The program can read .bmp images and apply DCT, then output the compressed image.
+The program can read .bmp images and apply DCT, then output the compressed image as well as the quantized data.
 
 ## Prerequisites
 Configure IntelliJ for a standard JavaFX project using JavaFX 16.
@@ -28,6 +31,12 @@ Configure IntelliJ for a standard JavaFX project using JavaFX 16.
 2. Select Application > "+" symbol on the top left > Application
 3. In VM Options textfield, write "`--module-path (JavaFX SDK Root Folder)\lib --add-modules javafx.controls,javafx.fxml`"
 4. In Main Class textfield, write "`Main`"
+
+####   on macOS:
+
+At the root folder before Javafx and Project_2_jar, run in terminal:
+
+java --module-path "javafx-sdk-16/lib" --add-modules javafx.controls,javafx.fxml -jar "Project_2_jar/Project 2_jar.jar"
 
 ## Author & Libraries
 

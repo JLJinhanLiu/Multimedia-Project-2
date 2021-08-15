@@ -9,6 +9,7 @@ import javafx.scene.paint.Color;
 
 import javax.imageio.ImageIO;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import static java.lang.Math.*;
@@ -35,7 +36,7 @@ public class ImageProcessing {
             {64,64,64,64,64,64,64,64}
     };
 
-    public static Image convert(Image input){
+    public static Image convert(Image input) {
         WritableImage writableImage = new WritableImage((int) input.getWidth(), (int) input.getHeight());
         WritableImage quantizedImage = new WritableImage((int) input.getWidth(), (int) input.getHeight());
         PixelReader pixelReader = input.getPixelReader();
@@ -57,12 +58,20 @@ public class ImageProcessing {
                 DCTTransform();                     // apply DCT transform to each 8x8 matrix
                 quantization();                     // apply quantization
 
-                for (int k = 0; k < 8; k++){                // write quantized result
+                for (int k = 0; k < 8; k++){         // write quatization in the 8x8 segment
                     for (int l = 0; l < 8; l++){
+                        // convert to RGB and write to image
                         quantizedWriter.setColor(8*j + k, 8*i + l, convertRGB(k, l));
                     }
                 }
 
+                if (i == 0 && j == 0) {             // write result to file
+                    writeToFile(false, i, j);
+                } else {
+                    writeToFile(true, i, j);
+                }
+
+                invQuantization();                  // invert quantization step
                 invDCTTransform();                  // convert quantized matrix back
 
                 for (int k = 0; k < 8; k++){                // write pixels in the 8x8 segment
@@ -76,6 +85,7 @@ public class ImageProcessing {
         }
         writeToFile("-compressed", writableImage);
         writeToFile("-quantized", quantizedImage);
+
         return writableImage;
     }
 
@@ -135,6 +145,17 @@ public class ImageProcessing {
         }
     }
 
+    private static void invQuantization(){
+        for (int i = 0; i < 8; i++){
+            for (int j = 0; j < 8; j++){
+                YMatrix[i][j] = YMatrix[i][j]*QutMatrix[i][j];
+                UMatrix[i][j] = UMatrix[i][j]*QutMatrix[i][j];
+                VMatrix[i][j] = VMatrix[i][j]*QutMatrix[i][j];
+            }
+        }
+
+    }
+
     private static void invDCTTransform(){
         YMatrix = abMultiply(abMultiply(DCTMatrixT, YMatrix), DCTMatrix);
         UMatrix = abMultiply(abMultiply(DCTMatrixT, UMatrix), DCTMatrix);
@@ -161,6 +182,28 @@ public class ImageProcessing {
             ImageIO.write(SwingFXUtils.fromFXImage(writableImage, null),
                     "png", new File(String.join("", filepath + properties + ".png")));
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void writeToFile(boolean bool, int i, int j) {
+        File file = new File(String.join("", filepath + "-quantized-data" + ".txt"));
+        try{
+            file.createNewFile();
+            FileWriter fileWriter = new FileWriter(String.join("", filepath + "-quantized-data" + ".txt"), bool);
+            fileWriter.write("\nThis is the #" + i + " 8x8 block from the top and #" + j + " 8x8 block from the left.\n");
+            for (int k = 0; k < 8; k++){        // write quantized result
+                for (int l = 0; l < 8; l++){
+                    fileWriter.write("("+
+                            YMatrix[k][l] + ","+
+                            UMatrix[k][l] + "," +
+                            VMatrix[k][l] + ")");
+                }
+                fileWriter.write("\n");
+            }
+            fileWriter.close();
+        }
+        catch (IOException e){
             e.printStackTrace();
         }
     }
