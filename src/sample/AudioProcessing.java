@@ -63,7 +63,12 @@ public class AudioProcessing {
             // compress file with huffman
             StringBuilder output = new StringBuilder();
             for (int i = 0; i < frameCounter; i++){
-                output.append((short) midside[0][i]).append(',').append((short) midside[1][i]);
+                if (numChannels > 1){
+                    output.append((short) midside[0][i]).append(',').append((short) midside[1][i]).append(';');
+                }
+                else{
+                    output.append((short) midside[0][i]).append(';');
+                }
             }
             HuffmanCoding huffmanCoding = new HuffmanCoding(output.toString());
             huffmanCoding.compress();
